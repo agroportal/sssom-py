@@ -142,7 +142,7 @@ def read_obographs_json(
     )
 
 
-def read_snomed_icd10cm_map_tsv(
+def read_snomed_complex_map_tsv(
     file_path: str,
     prefix_map: Dict[str, str] = None,
     meta: Dict[str, str] = None,
@@ -156,7 +156,7 @@ def read_snomed_icd10cm_map_tsv(
     """
     raise_for_bad_path(file_path)
     df = read_pandas(file_path)
-    df2 = from_snomed_icd10cm_map_tsv(df, prefix_map=prefix_map, meta=meta)
+    df2 = from_snomed_complex_map_tsv(df, prefix_map=prefix_map, meta=meta)
     return df2
 
 
@@ -520,7 +520,7 @@ def from_obographs(
     return to_mapping_set_dataframe(mdoc)
 
 
-def from_snomed_icd10cm_map_tsv(
+def from_snomed_complex_map_tsv(
     df: pd.DataFrame,
     prefix_map: Optional[PrefixMap] = None,
     meta: Optional[MetadataType] = None,
@@ -682,8 +682,8 @@ def get_parsing_function(input_format: Optional[str], filename: str) -> Callable
         return read_alignment_xml
     elif input_format == "obographs-json":
         return read_obographs_json
-    elif input_format == "snomed-icd10cm-map-tsv":
-        return read_snomed_icd10cm_map_tsv
+    elif input_format == "snomed-complex-map-tsv":
+        return read_snomed_complex_map_tsv
 
     else:
         raise Exception(f"Unknown input format: {input_format}")
