@@ -285,13 +285,75 @@ def to_fhir_json(msdf: MappingSetDataFrame) -> Dict:
       - ConcpetMap::SSSOM mapping spreadsheet: https://docs.google.com/spreadsheets/d/1J19foBAYO8PCHwOfksaIGjNu-q5ILUKFh2HpOCgYle0/edit#gid=1389897118
 
     TODOs
-    todo: when/how to conform to R5 instead of R4?: https://build.fhir.org/conceptmap.html
-    TODO: Add additional fields from both specs
+     todo: when/how to conform to R5 instead of R4?: https://build.fhir.org/conceptmap.html
+     TODO: Add additional fields from both specs
      - ConceptMap spec fields: https://www.hl7.org/fhir/r4/conceptmap.html
       - Joe: Can also utilize: /Users/joeflack4/projects/hapi-fhir-jpaserver-starter/_archive/issues/sssom/example_json/minimal.json
-     - SSSOM more fields:
-     - prefix_map
-     - SSSOM spec fields: https://mapping-commons.github.io/sssom/Mapping/
+     - SSSOM https://mapping-commons.github.io/sssom/Mapping/
+        author_id,?
+        author_label,?
+        comment,group.element.target.comment
+        confidence,?
+        creator_id,?,?,See: #1
+        creator_label,?,?,See: #1
+        license,copyright~,?,#1: If there is any variation for any records in a MappingSet, this may need to be a group.element.target.extension
+        mapping_cardinality,?
+        mapping_date,date~,?,See: #1
+        mapping_justification,?,group.element.target.extension
+        mapping_provider,?,?,See: #1
+        mapping_tool,?,?,See: #1
+        mapping_tool_version,?
+        match_string,?
+        object_category,?
+        object_id,group.element.target.code
+        object_label,group.element.target.display
+        object_match_field,?,?,See: #1
+        object_preprocessing,?,?,See: #1
+        object_source,targetUri;group.target,?,See: #1
+        object_source_version,?,?,See: #1
+        object_type,?,?,See: #1
+        other,?,?,See: #1
+        predicate_id,group.element.target.equivalence
+        predicate_label,?
+        predicate_modifier,n/a?,n/a?,It is either the case that (a) this will modify predicate_id and thus be mapped to group.element.target.equivalence, or (b) there may be some cases where the predicate_id + modifier is not mappable to anything in 'equivalence'.
+        reviewer_id,?
+        reviewer_label,?
+        see_also,?,?,See: #1
+        semantic_similarity_measure,?
+        semantic_similarity_score,?
+        subject_category,?
+        subject_id,group.element.code
+        subject_label,group.element.display
+        subject_match_field,?,?,See: #1
+        subject_preprocessing,?,?,See: #1
+        subject_source,sourceUri;group.source~,?,See: #1
+        subject_source_version,?,?,See: #1
+        subject_type,?,?,See: #1
+     - SSSOM https://mapping-commons.github.io/sssom/MappingSet/
+        comment,?
+        creator_id,?
+        creator_label,?
+        license,copyright
+        mapping_date,date
+        mapping_provider,?
+        mapping_set_description,?
+        mapping_set_id,url
+        mapping_set_source,?
+        mapping_set_version,?
+        mapping_tool,?
+        mappings,?
+        object_match_field,?
+        object_preprocessing,?
+        object_source,?
+        object_source_version,?
+        object_type,?
+        other,?
+        see_also,?
+        subject_match_field,?
+        subject_preprocessing,?
+        subject_source,sourceUri;group.source
+        subject_source_version,?
+        subject_type,?
     """
     df: pd.DataFrame = msdf.df
     # Intermediary variables
